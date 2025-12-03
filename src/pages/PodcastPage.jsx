@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,23 @@ import SEOHelmet from '@/components/SEOHelmet';
 import FormspreeForm from '@/components/FormspreeForm';
 
 const PodcastPage = () => {
+  // Load Buzzsprout player script dynamically
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.charset = 'utf-8';
+    script.src = 'https://www.buzzsprout.com/2562028.js?container_id=buzzsprout-large-player&player=large';
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup script when component unmounts
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, []);
   const pageTitle = "Under The Hood Podcast | Marketing Car";
   const pageDescription = "Straightforward conversations with small business owners about the challenges that shape their businesses.";
 
@@ -203,8 +220,73 @@ const PodcastPage = () => {
         </div>
       </section>
 
-      {/* What You'll Hear Section */}
+      {/* For Listeners Section */}
       <section className="py-20 bg-secondary/5">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="text-4xl sm:text-5xl font-bold font-heading mb-8 text-white"
+            >
+              For Listeners
+            </motion.h2>
+            <motion.p
+              variants={itemVariants}
+              className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto"
+            >
+              Under The Hood is built for owners who want real, practical guidance without filler. Each episode includes clear lessons, honest conversations, and examples you can put into practice right away.
+            </motion.p>
+
+            {/* Buzzsprout Podcast Player */}
+            <motion.div
+              variants={itemVariants}
+              className="mb-8 max-w-3xl mx-auto"
+            >
+              <div id='buzzsprout-large-player'></div>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap justify-center gap-4"
+            >
+              <Button size="lg" variant="default" className="text-lg" asChild>
+                <a href="https://www.youtube.com/channel/UCQNcMNgyfYOZfiBUu3Om-rg" target="_blank" rel="noopener noreferrer">
+                  <Youtube className="mr-2 h-5 w-5" />
+                  YouTube
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" className="text-lg" asChild>
+                <a href="https://open.spotify.com/show/2u3u2NgY0ryFpA0FQde3Tm" target="_blank" rel="noopener noreferrer">
+                  <Music className="mr-2 h-5 w-5" />
+                  Spotify
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" className="text-lg" asChild>
+                <a href="https://podcasts.apple.com" target="_blank" rel="noopener noreferrer">
+                  <Music className="mr-2 h-5 w-5" />
+                  Apple Podcasts
+                </a>
+              </Button>
+            </motion.div>
+            <motion.p
+              variants={itemVariants}
+              className="text-muted-foreground mt-6"
+            >
+              Listen on YouTube, Spotify, or Apple Podcasts.<br />
+              New episodes every week.
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* What You'll Hear Section */}
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.div
             variants={containerVariants}
@@ -236,7 +318,7 @@ const PodcastPage = () => {
       </section>
 
       {/* Be a Guest Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-secondary/5">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.div
             variants={containerVariants}
@@ -283,62 +365,6 @@ const PodcastPage = () => {
                 </CardContent>
               </Card>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* For Listeners Section */}
-      <section className="py-20 bg-secondary/5">
-        <div className="container mx-auto px-6 lg:px-8">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <motion.h2
-              variants={itemVariants}
-              className="text-4xl sm:text-5xl font-bold font-heading mb-8 text-white"
-            >
-              For Listeners
-            </motion.h2>
-            <motion.p
-              variants={itemVariants}
-              className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto"
-            >
-              Under The Hood is built for owners who want real, practical guidance without filler. Each episode includes clear lessons, honest conversations, and examples you can put into practice right away.
-            </motion.p>
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap justify-center gap-4"
-            >
-              <Button size="lg" variant="default" className="text-lg" asChild>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                  <Youtube className="mr-2 h-5 w-5" />
-                  YouTube
-                </a>
-              </Button>
-              <Button size="lg" variant="outline" className="text-lg" asChild>
-                <a href="https://spotify.com" target="_blank" rel="noopener noreferrer">
-                  <Music className="mr-2 h-5 w-5" />
-                  Spotify
-                </a>
-              </Button>
-              <Button size="lg" variant="outline" className="text-lg" asChild>
-                <a href="https://podcasts.apple.com" target="_blank" rel="noopener noreferrer">
-                  <Music className="mr-2 h-5 w-5" />
-                  Apple Podcasts
-                </a>
-              </Button>
-            </motion.div>
-            <motion.p
-              variants={itemVariants}
-              className="text-muted-foreground mt-6"
-            >
-              Listen on YouTube, Spotify, or Apple Podcasts.<br />
-              New episodes every week.
-            </motion.p>
           </motion.div>
         </div>
       </section>
