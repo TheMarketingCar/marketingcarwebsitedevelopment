@@ -213,7 +213,7 @@ const PodcastPage = () => {
                 Every business owner runs into challenges that don't show up in highlight reels. Under The Hood brings those real moments to light.
               </p>
               <p>
-                Each episode is a fast-paced, twenty-minute conversation focused on one challenge an owner faced and the practical steps they took to overcome it. No theory. No jargon. Just honest stories and useful insights from people building their businesses day by day.
+                Each episode is a fast-paced conversation focused on one challenge an owner faced and the practical steps they took to overcome it. No theory. No jargon. Just honest stories and useful insights from people building their businesses day by day.
               </p>
             </motion.div>
           </motion.div>
